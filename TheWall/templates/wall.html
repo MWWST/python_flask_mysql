@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+  {% endblock %}
+{%block menu%}
+ {{super()}}
+ {%endblock%}
+	<div class="container">
+		{% block content %}
+	 	<div class="row">
+			<div class="small-12 columns">
+				<h1> Welcome, {{session['first_name']}}!</h1>
+				<h3> This is a general open message board, post interesting things, don't be rude. k thx</h3>
+				{{data}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns callout">
+			<h3>Post a Message</h3>
+				<form method="POST" action="/message/create">
+					<textarea name="message"></textarea>
+				<button type="submit" class="button large float-right">Post a Message</button>
+				</form>
+			</div>
+		</div>
+	<!-- 	{{data}} -->
+			{%for message in messages%}
+			<div class="row">
+			<div class="small-12 columns">
+			 <h5>{{message['first_name']}} {{message['last_name']}} - {{message['messages_created']}}</h5>
+				<p class="callout">{{message['message']}}</p>
+			 
+			</div>
+			</div>
+				{%for comment in comments%}
+				<div class="row">
+				 <div class="small-11 small-offset 1 collumnts float-right">
+				 {%if comment['message_id'] == message['messageId']%}
+				 	 <h5>{{comment['first_name']}} {{comment['last_name']}} - {{comment['comments_created']}}</h5>
+				<h6>{{comment['comment']}}</h6>
+				 	{%endif%}
+				 	</div>
+				 </div>
+				 {%endfor%}
+				<div class="row">
+			<div class="small-11 small-offset-1 columns callout float-right">
+			<h4>Post a comment </h4>
+				<form method="POST" action="/comment/create">
+					<textarea name="comment"></textarea>
+					<input type="hidden" value="{{message['messageId']}}" name="message_id">
+				<button type="submit" class="button success large float-right">Post a Comment</button>
+				</form>
+			</div>
+		</div>
+			{%endfor%}
+		</div>
+		</div>
+	</div>
+	{%endblock%}
+</body>
+</html>

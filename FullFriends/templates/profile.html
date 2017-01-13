@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+{%if data%}
+<!-- {{data}} -->
+	{%for value in data['one_friend']%}
+		{{value['first_name']}}
+		{{value['last_name']}}
+		{{value['occupation']}}
+		{{value['email']}}
+		{{value['created_at']}}
+		{{value['updated_at']}}
+	{%if 'edit' in session%}
+		<form method="POST" action="/friends/{{value['id']}}">
+			<input type="text" name="first_name" placeholder="First Name">
+			<input type="text" name="last_name" placeholder ="Last Name ">
+			<input type="email" name="email_address" placeholder ="Email">
+			<input type="text" name="occupation" placeholder ="Occupation">
+			<button type="submit" class="button large success float-right">Make Changes</button>
+		</form>
+	{%endif%}
+	{%endfor%}
+{%endif%}
+
+				
+
+</body>
+</html>

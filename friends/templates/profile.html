@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+{%if one_friend%}
+	<h1>{{one_friend['first_name']}} {{one_friend['last_name']}}</h1>h1>
+	<h2>{{one_friend['occupation']}}</h2>
+	{%if edit%}
+		{%if edit == 'true'%}
+			<form method="POST" action="/friends/{{one_friend}}">
+				<input type="text" name="first_name" placeholder="First Name">
+				<input type="text" name="last_name" placeholder ="Last Name ">
+				<input type="email" name="email" placeholder ="Email">
+				<input type="text" name="occupation" placeholder ="Occupation">
+				<button type="submit" class="button large success float-right">Make Changes</button>
+			</form>
+		{%endif%}
+	{%endif%}
+{%endif%}
+</body>
+</html>

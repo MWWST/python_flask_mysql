@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- Compressed CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation.min.css">
+<!-- Compressed JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.min.js"></script>
+<style>
+	.error {
+	background-color: red;
+}
+.success {
+	background-color:green;
+}
+	
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="small-12 colums">
+			{%with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+					<div class="errors">
+						<ul>
+						 {% for category, message in messages %}
+						 	<li class="{{category}}">{{message}}</li>
+						 {%endfor%}
+						 </ul>
+					</div>
+				{%endif%}
+			{%endwith%}
+		</div>	
+	</div>
+	<div class="row">
+		<div class="small-6 small-offset-2 columns">
+			<h2 style="text-align:center;">Enter an email address</h2>
+			<form method="POST" action="/email/create">
+			  <div class="row">
+			    <!-- <div class="small-3 columns">
+			      <label for="middle-label" class="text-right middle">Email</label>
+			    </div> -->
+			    <div class="small-12 columns">
+			      <input type="email" id="middle-label" name ="email" placeholder="Enter your email address">
+			    </div>
+			  </div>
+			   <button type="submit" class="success button large float-right">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <!-- Compressed CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation.min.css">
+
+<!-- Compressed JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.min.js"></script>
+</head>
+    <title>{% block title %}{% endblock %} - My Webpage</title>
+    {% endblock %}
+  </head>
+  <body>
+  {% block menu %}
+    {%if 'loggedIn' not in session%}
+      <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+         <li class="menu-text">User Registration</li>
+      </ul>
+      </div>
+    </div>
+    {%else%}
+        <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+         <li class="menu-text">User Registration</li>
+      <!--   <li><a href="#">Item One</a></li>
+        <li><a href="#">Item Two</a></li>
+        <li><a href="#">Item Three</a></li> -->
+    </ul>
+      </div>
+      <div class="top-bar-right">
+        Welcome {{session['first_name']}}
+        <a href="/logout">Logout</a>
+      </div>
+    </div>
+    {%endif%}
+  {% endblock %}
+    <div id="content">{% block content %}
+      {%with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+             {% for category, message in messages %}
+             <div class="callout {{category}}">
+               <p>  {{message}} </p>
+              </div>
+             {%endfor%}
+             </ul>
+          </div>
+        {%endif%}
+      {%endwith%}
+
+    {% endblock %}</div>
+    <div id="footer" style="text-align:center">
+      {% block footer %}
+      &copy; Copyright 2017 by <a href="http://domain.invalid/">Michael Weitzman</a>.
+      {% endblock %}
+    </div>
+  </body>
+</html>
